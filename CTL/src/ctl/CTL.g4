@@ -3,36 +3,36 @@ grammar CTL;
 
 /* Formula */
 
-root	: stopper? (formula stopper)*;
+root 	: formula*;
 
-formula	: state 
+formula	: '(' formula ')'
+		| state
 		| path
 		;
 
-state 	: TRUE
-		| FALSE
-		| NEG state
-		| ATOMIC_PROPOSITION
-		| state WEDGE<assoc=left> state
-		| state VEE state
-		| state TO<assoc=right> state
-		| state EQUIV state
-		| A path
-		| E path
-		| '(' state ')'
+path 	: X state 						#Next	// TODO: X should bind stronger than &&
+		| F state						#Eventually
+		| G state						#Always
+		| <assoc=right> state U state 	#Until
 		;
 
-path 	: X state
-		| F state
-		| G state
-		| state U<assoc=right> state
-		| '(' path ')'
+state 	: A path							#ForAll
+		| E path							#Exists
+		| NEG state							#Not
+		| TRUE								#True
+		| FALSE								#False
+		| ATOMIC_PROPOSITION				#AtomicProposition
+		| <assoc=left> state WEDGE state 	#And
+		| <assoc=right> state VEE state		#Or
+		| <assoc=right> state TO state		#Implies
+		| <assoc=right> state EQUIV state	#Iff
 		;
+
 
 /* Constants */
  
 
-TRUE	:	('true' | 'True')	;
+TRUE	:	('true' | 'True' )	; 
 FALSE	:	('false' | 'False')	;
 
 /* Letters */
@@ -51,13 +51,10 @@ EQUIV	:	'<->';
 
 /* Expression */
 
-ATOMIC_PROPOSITION	: [a] ;
-PACKAGE_NAME		: [p] ;
-CLASS_NAME			: [c] ;
-FIELD_NAME			: [f] ;
+ATOMIC_PROPOSITION	: [a] ; // TODO
+PACKAGE_NAME		: [p] ; // TODO
+CLASS_NAME			: [c] ; // TODO
+FIELD_NAME			: [f] ; // TODO
 
 /* Rules */
-WS : [ \t]+ -> skip ; // skip spaces and tabs
-
-stopper	: '\r'?'\n' | ';' | <EOF> ;
-
+WS : [ \t\r\n;]+ -> skip ; // skip spaces and tabs
