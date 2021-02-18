@@ -5,18 +5,19 @@ grammar CTL;
 
 root 	: formula*;
 
-formula	: '(' formula ')'
-		| state
+formula	: state
 		| path
 		;
 
-path 	: X state 						#Next	// TODO: X should bind stronger than &&
+path 	: '(' path ')'					#PathBracket
+		| X state 						#Next	// TODO: X should bind stronger than &&
 		| F state						#Eventually
 		| G state						#Always
 		| <assoc=right> state U state 	#Until
 		;
 
-state 	: A path							#ForAll
+state 	: '(' state ')'						#StateBracket
+		| A path							#ForAll
 		| E path							#Exists
 		| NEG state							#Not
 		| TRUE								#True
