@@ -1,4 +1,3 @@
-// Define a grammar called Hello
 grammar CTL;
 
 /* Formula */
@@ -27,7 +26,6 @@ formula	: '(' formula ')'						#Bracket
 
 /* Constants */
  
-
 TRUE	:	('true' | 'True' )	; 
 FALSE	:	('false' | 'False')	;
 
@@ -53,4 +51,5 @@ CLASS_NAME			: [c] ; // TODO
 FIELD_NAME			: [f] ; // TODO
 
 /* Rules */
+
 WS : [ \t\r\n;]+ -> skip ; // skip spaces and tabs
