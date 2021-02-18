@@ -5,28 +5,23 @@ grammar CTL;
 
 root 	: formula*;
 
-formula	: state
-		| path
-		;
-
-path 	: '(' path ')'					#PathBracket
-		| X state 						#Next	// TODO: X should bind stronger than &&
-		| F state						#Eventually
-		| G state						#Always
-		| <assoc=right> state U state 	#Until
-		;
-
-state 	: '(' state ')'						#StateBracket
-		| A path							#ForAll
-		| E path							#Exists
-		| NEG state							#Not
-		| TRUE								#True
-		| FALSE								#False
-		| ATOMIC_PROPOSITION				#AtomicProposition
-		| <assoc=left> state WEDGE state 	#And
-		| <assoc=right> state VEE state		#Or
-		| <assoc=right> state TO state		#Implies
-		| <assoc=right> state EQUIV state	#Iff
+formula	: '(' formula ')'						#Bracket
+		| NEG formula							#Not
+		| TRUE									#True
+		| FALSE									#False
+		| ATOMIC_PROPOSITION					#AtomicProposition
+		| A X formula							#ForAllNext
+		| A F formula							#ForAllEventually
+		| A G formula							#ForAllAlways
+		| <assoc=right> A formula U formula		#ForAllUntil
+		| E X formula							#ExistsNext
+		| E F formula							#ExistsEventually
+		| E G formula							#ExistsAlways
+		| <assoc=right> E formula U formula		#ExistsUntil
+		| <assoc=left> formula WEDGE formula 	#And
+		| <assoc=right> formula VEE formula		#Or
+		| <assoc=right> formula TO formula		#Implies
+		| <assoc=right> formula EQUIV formula	#Iff
 		;
 
 
