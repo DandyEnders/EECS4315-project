@@ -1,16 +1,17 @@
 grammar CTL;
 
 /* Formula */
-
-root 	: formula*;
+ 
+root 	: formula*;       
 
 formula	: '(' formula ')'						#Bracket
-		| NEG formula							#Not
+		| NEG formula							#Not 
 		| TRUE									#True
 		| FALSE									#False
-		| ATOMIC_PROPOSITION					#AtomicProposition
-		| A X formula							#ForAllNext
-		| A F formula							#ForAllEventually
+//		| ATOMIC_PROPOSITION					#AtomicProposition
+		| atomic								#AtomicProposition
+		| A X formula							#ForAllNext 
+		| A F formula							#ForAllEventually 
 		| A G formula							#ForAllAlways
 		| <assoc=right> A formula U formula		#ForAllUntil
 		| E X formula							#ExistsNext
@@ -24,9 +25,11 @@ formula	: '(' formula ')'						#Bracket
 		;
 
 
+//atomic : (PACKAGE_NAME DOT)+ CLASS_NAME DOT FIELD_NAME;
+atomic	: (STRING DOT)+ STRING	;
 /* Constants */
  
-TRUE	:	('true' | 'True' )	; 
+TRUE	:	('true' | 'True' )	;  
 FALSE	:	('false' | 'False')	;
 
 /* Letters */
@@ -43,13 +46,23 @@ NEG		:	'!'	;
 TO		:	'->';
 EQUIV	:	'<->';
 
+STRING	:	CHAR+		; 
 /* Expression */
+//PACKAGE_NAME		: LOWERSTRING; // TODO
+//CLASS_NAME			: ([A-Z]STRING)  ; // TODO
 
-ATOMIC_PROPOSITION	: [a] ; // TODO
-PACKAGE_NAME		: [p] ; // TODO
-CLASS_NAME			: [c] ; // TODO
-FIELD_NAME			: [f] ; // TODO
+//ATOMIC_PROPOSITION	: [a] ;  
+FIELD_NAME			: STRING; // TODO
 
+//LOWERCHARWITHDOT	:	[a-z.]	;
+//LOWERSTRINGWITHDOT:	LOWERCHARWITHDOT+;
+//LOWERCHAR	:	[a-z]	;
+//LOWERSTRING:	LOWERCHAR+;
+CHAR	:	'a'..'z' 
+			| 'A'..'Z'	;
+CAP		:	[A-Z]		;
+
+DOT		:	'.' 		;	  
 /* Rules */
 
 WS : [ \t\r\n;]+ -> skip ; // skip spaces and tabs
