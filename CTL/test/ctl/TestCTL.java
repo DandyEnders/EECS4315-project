@@ -16,6 +16,7 @@ class TestCTL {
 		ParseTree tree = parser.root();
 		
 		System.out.println(tree.toStringTree());
+		
 	}
 
 }
