@@ -4,23 +4,23 @@ grammar CTL;
 
 root 	: formula*;
 
-formula	: '(' formula ')'						#Bracket
-		| NEG formula							#Not
-		| TRUE									#True
-		| FALSE									#False
-		| ATOMIC_PROPOSITION					#AtomicProposition
-		| A X formula							#ForAllNext
-		| A F formula							#ForAllEventually
-		| A G formula							#ForAllAlways
-		| <assoc=right> A formula U formula		#ForAllUntil
-		| E X formula							#ExistsNext
-		| E F formula							#ExistsEventually
-		| E G formula							#ExistsAlways
-		| <assoc=right> E formula U formula		#ExistsUntil
-		| <assoc=left> formula WEDGE formula 	#And
-		| <assoc=right> formula VEE formula		#Or
-		| <assoc=right> formula TO formula		#Implies
-		| <assoc=right> formula EQUIV formula	#Iff
+formula	: '(' formula ')'							#Bracket
+		| NEG formula								#Not
+		| TRUE										#True
+		| FALSE										#False
+		| ATOMIC_PROPOSITION						#AtomicProposition
+		| A X formula								#ForAllNext
+		| A F formula								#ForAllEventually
+		| A G formula								#ForAllAlways
+		| <assoc=right> A '(' formula U formula ')'	#ForAllUntil
+		| E X formula								#ExistsNext
+		| E F formula								#ExistsEventually
+		| E G formula								#ExistsAlways
+		| <assoc=right> E '(' formula U formula ')'	#ExistsUntil
+		| <assoc=left> formula WEDGE formula 		#And
+		| <assoc=right> formula VEE formula			#Or
+		| <assoc=right> formula TO formula			#Implies
+		| <assoc=right> formula EQUIV formula		#Iff
 		;
 
 
