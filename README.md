@@ -21,4 +21,4 @@ git clone https://github.com/DandyEnders/EECS4315-project/
 5. Open `/src/ctl/CTL.g4`
 6. Save with Ctrl + S 
 7. Double click "root" token in `CTL.g4` file
-8. In Parse Tree, you may now write formulas to test it.
+8. In Parse Tree view, you may now write formulas to test it.
