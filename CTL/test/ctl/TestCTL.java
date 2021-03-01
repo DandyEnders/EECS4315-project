@@ -58,7 +58,7 @@ class TestCTL {
 				CharStreams.fromString(init.LB + init.TRUE + init.AND + init.TRUE + init.RB + init.AND + init.TRUE));
 		Lexer lexer11 = new CTLLexer(CharStreams.fromString(init.TRUE + init.IFF + init.FALSE));
 		Lexer lexer12 = new CTLLexer(CharStreams.fromString(init.EX + init.NEXT + init.TRUE + init.OR + init.FALSE));
-		Lexer lexer13 = new CTLLexer(CharStreams.fromString(init.FA + init.TRUE + init.U + init.FALSE));
+		Lexer lexer13 = new CTLLexer(CharStreams.fromString(init.FA + init.LB + init.TRUE + init.U + init.FALSE + init.RB));
 		Lexer lexer14 = new CTLLexer(CharStreams.fromString(init.EX + init.EVENT + init.TRUE + init.AND + init.TRUE));
 		Lexer lexer15 = new CTLLexer(CharStreams.fromString(init.FA + init.ALWAYS + init.TRUE));
 
@@ -132,7 +132,7 @@ class TestCTL {
 
 		// Testing For all, until with true,false
 		String f13 = remove(tree13.toStringTree(parser13));
-		assertEquals("(A (true) U (false))", f13);
+		assertEquals("(A ( (true) U (false) ))", f13);
 
 		// Testing Exists, eventually with AND, true
 		String f14 = remove(tree14.toStringTree(parser14));
@@ -213,7 +213,8 @@ class TestCTL {
 		Lexer lexer3 = new CTLLexer(CharStreams.fromString(init.FA + init.NEXT + init.EX + init.NEXT + init.TRUE));
 		Lexer lexer4 = new CTLLexer(
 				CharStreams.fromString(init.FA + init.EVENT + init.EX + init.EVENT + init.NEG + init.FALSE));
-		Lexer lexer5 = new CTLLexer(CharStreams.fromString(init.FA + init.EX + init.TRUE + init.U + init.FALSE));
+		Lexer lexer5 = new CTLLexer(
+				CharStreams.fromString(init.FA + init.EX + init.TRUE + init.LB + init.TRUE + init.U + init.FALSE + init.RB));
 		Lexer lexer6 = new CTLLexer(
 				CharStreams.fromString(init.EX + init.LB + init.EX + init.NEXT + init.TRUE + init.RB));
 		Lexer lexer7 = new CTLLexer(CharStreams.fromString(init.EX + init.NEXT + init.FA + init.NEXT + init.TRUE));
@@ -264,11 +265,11 @@ class TestCTL {
 
 		// Testing For all Exists TRUE Until FALSE
 		String f5 = remove(tree5.toStringTree(parser5));
-		assertEquals("(A (E (true) U (false)))", f5);
+		assertEquals("(A) (E) (true) (( (true) U) (false)", f5);
 
 		// Testing Exists Exists next true with brackets
 		String f6 = remove(tree6.toStringTree(parser6));
-		assertEquals("(E (( (E X (true)) )))", f6);
+		assertEquals("(E ( (E X (true)) ))", f6);
 
 		// Testing Exists Next For all Next TRUE
 		String f7 = remove(tree7.toStringTree(parser7));

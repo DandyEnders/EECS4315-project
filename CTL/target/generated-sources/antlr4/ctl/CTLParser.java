@@ -401,7 +401,7 @@ public class CTLParser extends Parser {
 			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(48);
+			setState(52);
 			switch ( getInterpreter().adaptivePredict(_input,1,_ctx) ) {
 			case 1:
 				{
@@ -513,9 +513,11 @@ public class CTLParser extends Parser {
 				_ctx = _localctx;
 				_prevctx = _localctx;
 				setState(38); match(A);
-				setState(39); formula(0);
-				setState(40); match(U);
-				setState(41); formula(0);
+				setState(39); match(T__1);
+				setState(40); formula(0);
+				setState(41); match(U);
+				setState(42); formula(0);
+				setState(43); match(T__0);
 				}
 				break;
 			case 13:
@@ -523,15 +525,17 @@ public class CTLParser extends Parser {
 				_localctx = new ExistsUntilContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				setState(43); match(E);
-				setState(44); formula(0);
-				setState(45); match(U);
-				setState(46); formula(0);
+				setState(45); match(E);
+				setState(46); match(T__1);
+				setState(47); formula(0);
+				setState(48); match(U);
+				setState(49); formula(0);
+				setState(50); match(T__0);
 				}
 				break;
 			}
 			_ctx.stop = _input.LT(-1);
-			setState(64);
+			setState(68);
 			_errHandler.sync(this);
 			_alt = getInterpreter().adaptivePredict(_input,3,_ctx);
 			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
@@ -539,52 +543,52 @@ public class CTLParser extends Parser {
 					if ( _parseListeners!=null ) triggerExitRuleEvent();
 					_prevctx = _localctx;
 					{
-					setState(62);
+					setState(66);
 					switch ( getInterpreter().adaptivePredict(_input,2,_ctx) ) {
 					case 1:
 						{
 						_localctx = new AndContext(new FormulaContext(_parentctx, _parentState));
 						pushNewRecursionContext(_localctx, _startState, RULE_formula);
-						setState(50);
+						setState(54);
 						if (!(precpred(_ctx, 4))) throw new FailedPredicateException(this, "precpred(_ctx, 4)");
-						setState(51); match(WEDGE);
-						setState(52); formula(5);
+						setState(55); match(WEDGE);
+						setState(56); formula(5);
 						}
 						break;
 					case 2:
 						{
 						_localctx = new OrContext(new FormulaContext(_parentctx, _parentState));
 						pushNewRecursionContext(_localctx, _startState, RULE_formula);
-						setState(53);
+						setState(57);
 						if (!(precpred(_ctx, 3))) throw new FailedPredicateException(this, "precpred(_ctx, 3)");
-						setState(54); match(VEE);
-						setState(55); formula(3);
+						setState(58); match(VEE);
+						setState(59); formula(3);
 						}
 						break;
 					case 3:
 						{
 						_localctx = new ImpliesContext(new FormulaContext(_parentctx, _parentState));
 						pushNewRecursionContext(_localctx, _startState, RULE_formula);
-						setState(56);
+						setState(60);
 						if (!(precpred(_ctx, 2))) throw new FailedPredicateException(this, "precpred(_ctx, 2)");
-						setState(57); match(TO);
-						setState(58); formula(2);
+						setState(61); match(TO);
+						setState(62); formula(2);
 						}
 						break;
 					case 4:
 						{
 						_localctx = new IffContext(new FormulaContext(_parentctx, _parentState));
 						pushNewRecursionContext(_localctx, _startState, RULE_formula);
-						setState(59);
+						setState(63);
 						if (!(precpred(_ctx, 1))) throw new FailedPredicateException(this, "precpred(_ctx, 1)");
-						setState(60); match(EQUIV);
-						setState(61); formula(1);
+						setState(64); match(EQUIV);
+						setState(65); formula(1);
 						}
 						break;
 					}
 					} 
 				}
-				setState(66);
+				setState(70);
 				_errHandler.sync(this);
 				_alt = getInterpreter().adaptivePredict(_input,3,_ctx);
 			}
@@ -618,26 +622,27 @@ public class CTLParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd\3\23F\4\2\t\2\4\3\t"+
+		"\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd\3\23J\4\2\t\2\4\3\t"+
 		"\3\3\2\7\2\b\n\2\f\2\16\2\13\13\2\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3"+
 		"\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3"+
-		"\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\5\3\63\n\3\3\3\3\3\3\3"+
-		"\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\7\3A\n\3\f\3\16\3D\13\3\3\3\2\3\4"+
-		"\4\2\4\2\2T\2\t\3\2\2\2\4\62\3\2\2\2\6\b\5\4\3\2\7\6\3\2\2\2\b\13\3\2"+
-		"\2\2\t\7\3\2\2\2\t\n\3\2\2\2\n\3\3\2\2\2\13\t\3\2\2\2\f\r\b\3\1\2\r\16"+
-		"\7\17\2\2\16\63\5\4\3\22\17\20\7\b\2\2\20\21\7\t\2\2\21\63\5\4\3\16\22"+
-		"\23\7\b\2\2\23\24\7\13\2\2\24\63\5\4\3\r\25\26\7\b\2\2\26\27\7\f\2\2\27"+
-		"\63\5\4\3\f\30\31\7\7\2\2\31\32\7\t\2\2\32\63\5\4\3\n\33\34\7\7\2\2\34"+
-		"\35\7\13\2\2\35\63\5\4\3\t\36\37\7\7\2\2\37 \7\f\2\2 \63\5\4\3\b!\"\7"+
-		"\3\2\2\"#\5\4\3\2#$\7\4\2\2$\63\3\2\2\2%\63\7\5\2\2&\63\7\6\2\2\'\63\7"+
-		"\22\2\2()\7\b\2\2)*\5\4\3\2*+\7\n\2\2+,\5\4\3\2,\63\3\2\2\2-.\7\7\2\2"+
-		"./\5\4\3\2/\60\7\n\2\2\60\61\5\4\3\2\61\63\3\2\2\2\62\f\3\2\2\2\62\17"+
-		"\3\2\2\2\62\22\3\2\2\2\62\25\3\2\2\2\62\30\3\2\2\2\62\33\3\2\2\2\62\36"+
-		"\3\2\2\2\62!\3\2\2\2\62%\3\2\2\2\62&\3\2\2\2\62\'\3\2\2\2\62(\3\2\2\2"+
-		"\62-\3\2\2\2\63B\3\2\2\2\64\65\f\6\2\2\65\66\7\r\2\2\66A\5\4\3\7\678\f"+
-		"\5\2\289\7\16\2\29A\5\4\3\5:;\f\4\2\2;<\7\20\2\2<A\5\4\3\4=>\f\3\2\2>"+
-		"?\7\21\2\2?A\5\4\3\3@\64\3\2\2\2@\67\3\2\2\2@:\3\2\2\2@=\3\2\2\2AD\3\2"+
-		"\2\2B@\3\2\2\2BC\3\2\2\2C\5\3\2\2\2DB\3\2\2\2\6\t\62@B";
+		"\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\5\3\67"+
+		"\n\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\7\3E\n\3\f\3\16\3"+
+		"H\13\3\3\3\2\3\4\4\2\4\2\2X\2\t\3\2\2\2\4\66\3\2\2\2\6\b\5\4\3\2\7\6\3"+
+		"\2\2\2\b\13\3\2\2\2\t\7\3\2\2\2\t\n\3\2\2\2\n\3\3\2\2\2\13\t\3\2\2\2\f"+
+		"\r\b\3\1\2\r\16\7\17\2\2\16\67\5\4\3\22\17\20\7\b\2\2\20\21\7\t\2\2\21"+
+		"\67\5\4\3\16\22\23\7\b\2\2\23\24\7\13\2\2\24\67\5\4\3\r\25\26\7\b\2\2"+
+		"\26\27\7\f\2\2\27\67\5\4\3\f\30\31\7\7\2\2\31\32\7\t\2\2\32\67\5\4\3\n"+
+		"\33\34\7\7\2\2\34\35\7\13\2\2\35\67\5\4\3\t\36\37\7\7\2\2\37 \7\f\2\2"+
+		" \67\5\4\3\b!\"\7\3\2\2\"#\5\4\3\2#$\7\4\2\2$\67\3\2\2\2%\67\7\5\2\2&"+
+		"\67\7\6\2\2\'\67\7\22\2\2()\7\b\2\2)*\7\3\2\2*+\5\4\3\2+,\7\n\2\2,-\5"+
+		"\4\3\2-.\7\4\2\2.\67\3\2\2\2/\60\7\7\2\2\60\61\7\3\2\2\61\62\5\4\3\2\62"+
+		"\63\7\n\2\2\63\64\5\4\3\2\64\65\7\4\2\2\65\67\3\2\2\2\66\f\3\2\2\2\66"+
+		"\17\3\2\2\2\66\22\3\2\2\2\66\25\3\2\2\2\66\30\3\2\2\2\66\33\3\2\2\2\66"+
+		"\36\3\2\2\2\66!\3\2\2\2\66%\3\2\2\2\66&\3\2\2\2\66\'\3\2\2\2\66(\3\2\2"+
+		"\2\66/\3\2\2\2\67F\3\2\2\289\f\6\2\29:\7\r\2\2:E\5\4\3\7;<\f\5\2\2<=\7"+
+		"\16\2\2=E\5\4\3\5>?\f\4\2\2?@\7\20\2\2@E\5\4\3\4AB\f\3\2\2BC\7\21\2\2"+
+		"CE\5\4\3\3D8\3\2\2\2D;\3\2\2\2D>\3\2\2\2DA\3\2\2\2EH\3\2\2\2FD\3\2\2\2"+
+		"FG\3\2\2\2G\5\3\2\2\2HF\3\2\2\2\6\t\66DF";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {
