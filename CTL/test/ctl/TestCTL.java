@@ -145,6 +145,8 @@ class TestCTL {
 		String legal5 = " !E X E X !!!true";
 		String legal6 = " ((E X !(A X E X p2.p && !A X p1.d2) && p3.d2) && p1.d2)";
 		String legal7 = " (true && A((E(E(p1.dsa U p1.dd) U A X p1.as) && E(!p3.ds U p1.ew)) U !(A X p2.gd && true)))";
+		String legal8 = "ひらが.ひらが";
+		String legal9 = "cụcCứt.cụcCứt";
 		assertEquals(check(legal),true);
 		assertEquals(check(legal2),true);
 		assertEquals(check(legal3),true);
@@ -152,27 +154,48 @@ class TestCTL {
 		assertEquals(check(legal5),true);
 		assertEquals(check(legal6),true);
 		assertEquals(check(legal7),true);
+		assertEquals(check(legal8),true);
+		assertEquals(check(legal9),true);
+
 
 		
 	}
 	@Test
-	void testNotLegalLexerLogic() {}
+	void testNotLegalLexerLogic() {
+		assertEquals(check("F G java.asw"),false);
+		assertEquals(check("java.sds G"),false);
+		assertEquals(check("java.sds X"),false);
+		assertEquals(check("java.sds F"),false);
+		
+		assertEquals(check("G java.sds "),false);
+		assertEquals(check("X java.sds "),false);
+		assertEquals(check("F java.sds "),false);
+		
+		assertEquals(check("java.sds <->"),false);
+		assertEquals(check("java.ds G s.d"),false);
+		assertEquals(check("java.ds X s.d"),false);
+		assertEquals(check("java.ds F s.d"),false);
+	}
 	@Test
 	void testNotLegalLexerJavaName() {}
 	@Test
-	void testNotLegalLexerspecialChar() {
-		String notLegal2 = "E X java.powe.asd && E X java.java.java.java.java -> (E X a.a) && (E X 2)";
-		String notLegal3 = "(true && A((E(E(java.java U java.jav ) U A X java.ka ) && E ( ! java.d U java.ds ) ) U ! ( A X java.2 && true ) ) )";
-		String notLegal4 = " E X !(A X E X A X E X Truee && E X !p3.p2)";
-		String notLegal5 = " !EX E X !!!truee";
-		String notLegal6 = " ((E X !(A X E X p2.p && !A X p1.) && p3.d2) && False)";
-		String notLegal7 = " (true && A((E(E(p1.dsa U p1.dd) U A X p1.as) && E(!p3.ds U p1.2ew)) U !(A X p2.gd && true)))";
+	void testNotLegalJavaName() {
+		String notLegal2 = "E X java.powe.asd && E X java.java.java.java.java -> (E X a.a) && (E X 2)"; //2 is not valid
+		String notLegal3 = "(true && A((E(E(java.java U java.jav ) U A X java.ka ) && E ( ! java.d U java.ds ) ) U ! ( A X java.2 && true ) ) )"; //java.2 is not valid
+		String notLegal4 = " E X !(A X E X A X E X Truee && E X !p3.p2)"; //truee is not valid
+		String notLegal5 = " !EX E X !!!falsee"; //falsee is not valid 
+		String notLegal6 = " ((E X !(A X E X p2.p && !A X p1.) && p3.d2) && False)"; //p1. is not
+		String notLegal7 = " (true && A((E(E(p1.dsa U p1.dd) U A X p1.as) && E(!p3.ds U p1.2ew)) U !(A X p2.gd && true)))"; //p1.2ew is notvalid
+		String notLegal8 = "ひらが.2ひらが";
+		String notLegal9 = " (true && A((E(E(p1.dsa U p1.dd) U A X p1.as) && E(!p3.ds U p1.2ew)) U !(A X p2..gd && true)))"; //p1.2ew is notvalid
 		assertEquals(check(notLegal2),false);
 		assertEquals(check(notLegal3),false);
 		assertEquals(check(notLegal4),false);
 		assertEquals(check(notLegal5),false);
 		assertEquals(check(notLegal6),false);
 		assertEquals(check(notLegal7),false);
+		assertEquals(check(notLegal8),false);
+		assertEquals(check(notLegal9),false);
 		
 	}
 	@Test
@@ -201,7 +224,6 @@ class TestCTL {
 
 		try {
 			ParseTree tree = parser.root();
-//			System.out.println(tree.toStringTree(parser));
 
 		}
 		catch (Exception e)
