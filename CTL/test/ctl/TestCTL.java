@@ -140,39 +140,76 @@ class TestCTL {
 	{
 		String legal = "E X (java.awt.Something)";
 		String legal2 = "E X java.powe.asd && E X java.java.java.java.java -> (E X a.a) && (E X a.a)";
-		String legal3 = "( true && A ( ( E ( E ( java.java U java.jav ) U A X java.ka ) && E ( ! java.d U java.ds ) ) U ! ( A X java.gf && true ) ) )";
+		String legal3 = "(true && A((E(E(java.java U java.jav ) U A X java.ka ) && E ( ! java.d U java.ds ) ) U ! ( A X java.gf && true ) ) )";
+		String legal4 = " E X !(A X E X A X E X true && E X !p3.p2)";
+		String legal5 = " !E X E X !!!true";
+		String legal6 = " ((E X !(A X E X p2.p && !A X p1.d2) && p3.d2) && p1.d2)";
+		String legal7 = " (true && A((E(E(p1.dsa U p1.dd) U A X p1.as) && E(!p3.ds U p1.ew)) U !(A X p2.gd && true)))";
+		assertEquals(check(legal),true);
+		assertEquals(check(legal2),true);
+		assertEquals(check(legal3),true);
+		assertEquals(check(legal4),true);
+		assertEquals(check(legal5),true);
+		assertEquals(check(legal6),true);
+		assertEquals(check(legal7),true);
+
 		
-		Init init = new Init();
-		Lexer l1 = new CTLLexer(CharStreams.fromString(legal));
+	}
+	@Test
+	void testNotLegalLexerLogic() {}
+	@Test
+	void testNotLegalLexerJavaName() {}
+	@Test
+	void testNotLegalLexerspecialChar() {
+		String notLegal2 = "E X java.powe.asd && E X java.java.java.java.java -> (E X a.a) && (E X 2)";
+		String notLegal3 = "(true && A((E(E(java.java U java.jav ) U A X java.ka ) && E ( ! java.d U java.ds ) ) U ! ( A X java.2 && true ) ) )";
+		String notLegal4 = " E X !(A X E X A X E X Truee && E X !p3.p2)";
+		String notLegal5 = " !EX E X !!!truee";
+		String notLegal6 = " ((E X !(A X E X p2.p && !A X p1.) && p3.d2) && False)";
+		String notLegal7 = " (true && A((E(E(p1.dsa U p1.dd) U A X p1.as) && E(!p3.ds U p1.2ew)) U !(A X p2.gd && true)))";
+		assertEquals(check(notLegal2),false);
+		assertEquals(check(notLegal3),false);
+		assertEquals(check(notLegal4),false);
+		assertEquals(check(notLegal5),false);
+		assertEquals(check(notLegal6),false);
+		assertEquals(check(notLegal7),false);
+		
+	}
+	@Test
+	void testNotLegalLexerBasic()
+	{
+		String notLegal = "E X W (java.awt.Something)";
+		assertEquals(check(notLegal),false);
+		assertEquals(check("E E E A A <-> java.java"),false);
+		assertEquals(check("E E"),false);
+		assertEquals(check("E A"),false);
+		assertEquals(check("A"),false);	
+		assertEquals(check("E"),false);
+		assertEquals(check("->"),false);
+	}
+	
+	boolean check(String s)
+	{
+		Lexer l1 = new CTLLexer(CharStreams.fromString(s));
 		CommonTokenStream tokens = new CommonTokenStream(l1);
 		CTLParser parser = new CTLParser(tokens);
-		ParseTree tree = parser.root();
+		
+		l1.removeErrorListeners();
+		l1.addErrorListener(DescriptiveErrorListener.INSTANCE);
+		parser.removeErrorListeners();
+		parser.addErrorListener(DescriptiveErrorListener.INSTANCE);
 
-		assertEquals(parser.getNumberOfSyntaxErrors(),0);
-		
-		Lexer l2 = new CTLLexer(CharStreams.fromString(legal2));
-		CommonTokenStream tokens2 = new CommonTokenStream(l2);
-		CTLParser parser2 = new CTLParser(tokens2);
-		ParseTree tree2 = parser2.root();
-		assertEquals(parser2.getNumberOfSyntaxErrors(),0);
-		
-		Lexer l3 = new CTLLexer(CharStreams.fromString(legal3));
-		CommonTokenStream tokens3 = new CommonTokenStream(l3);
-		CTLParser parser3 = new CTLParser(tokens3);
-		ParseTree tree3 = parser3.root();
-		System.out.println(tree3.toStringTree());
-		assertEquals(parser3.getNumberOfSyntaxErrors(),0);
-		
-//		Lexer l4 = new CTLLexer(CharStreams.fromString(legal4));
-//		CommonTokenStream tokens4 = new CommonTokenStream(l4);
-//		CTLParser parser4 = new CTLParser(tokens4);
-//		ParseTree tree4 = parser4.root();
-//		System.out.println(tree4.toStringTree());
-//		assertEquals(parser4.getNumberOfSyntaxErrors(),0);
-		
-		
-		
-		
+		try {
+			ParseTree tree = parser.root();
+//			System.out.println(tree.toStringTree(parser));
+
+		}
+		catch (Exception e)
+		{
+			System.out.println(e.getMessage());
+			return false;
+		}
+		return true;
 	}
 
 }
